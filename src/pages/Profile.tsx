@@ -29,9 +29,9 @@ const Profile = () => {
             👨‍🎓
           </div>
           <div>
-            <h1 className="text-xl font-bold">Rajesh Kumar</h1>
+            <h1 className="text-xl font-bold">Student</h1>
             <p className="text-sm opacity-90">Computer Science & Engineering</p>
-            <p className="text-xs opacity-75 mt-1">III Year | Roll No: 20CS123</p>
+            <p className="text-xs opacity-75 mt-1">II Year | Roll No: 670329</p>
           </div>
         </div>
       </header>
