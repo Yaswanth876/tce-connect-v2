@@ -130,4 +130,14 @@ All colors MUST be HSL.
   .shadow-card-hover {
     box-shadow: var(--shadow-lg);
   }
+  
+  /* Hide scrollbar for horizontal scroll */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }

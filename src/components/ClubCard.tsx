@@ -11,7 +11,7 @@ interface ClubCardProps {
 
 export const ClubCard = ({ name, description, members, icon }: ClubCardProps) => {
   return (
-    <Card className="shadow-card hover:shadow-card-hover transition-shadow">
+    <Card className="shadow-card hover:shadow-card-hover transition-all duration-200 cursor-pointer hover:scale-[1.02]">
       <div className="p-4 space-y-3">
         <div className="flex items-start gap-3">
           <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-2xl flex-shrink-0">

@@ -2,6 +2,7 @@ import { Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EventCard } from "@/components/EventCard";
 import { BottomNav } from "@/components/BottomNav";
+import { Sidebar } from "@/components/Sidebar";
 
 const todaysEvents = [
   {
@@ -53,10 +54,12 @@ const upcomingEvents = [
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-background pb-20">
-      {/* Header */}
-      <header className="bg-primary text-primary-foreground p-4 sticky top-0 z-10 shadow-md">
-        <div className="max-w-lg mx-auto flex items-center justify-between">
+    <div className="flex min-h-screen bg-background">
+      <Sidebar />
+      <div className="flex-1 pb-20 lg:pb-0">
+        {/* Header */}
+        <header className="bg-primary text-primary-foreground p-4 lg:p-6 sticky top-0 z-10 shadow-md">
+          <div className="max-w-5xl mx-auto flex items-center justify-between">
           <div>
             <h1 className="text-xl font-bold">Welcome to TCE-Connect 👋</h1>
             <p className="text-sm opacity-90">Discover your campus events</p>
@@ -64,14 +67,14 @@ const Home = () => {
           <Button
             size="icon"
             variant="ghost"
-            className="text-primary-foreground hover:bg-primary-light"
+            className="text-primary-foreground hover:bg-primary-light transition-colors"
           >
             <Bell className="h-5 w-5" />
           </Button>
-        </div>
-      </header>
+          </div>
+        </header>
 
-      <div className="max-w-lg mx-auto px-4 py-6 space-y-6">
+        <div className="max-w-5xl mx-auto px-4 lg:px-6 py-6 space-y-6">
         {/* Today's Events */}
         <section>
           <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
@@ -91,15 +94,16 @@ const Home = () => {
             <span className="w-1 h-6 bg-accent rounded-full"></span>
             Upcoming Events
           </h2>
-          <div className="space-y-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {upcomingEvents.map((event, index) => (
               <EventCard key={index} {...event} />
             ))}
           </div>
         </section>
-      </div>
+        </div>
 
-      <BottomNav />
+        <BottomNav />
+      </div>
     </div>
   );
 };

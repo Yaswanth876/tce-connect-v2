@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ClubCard } from "@/components/ClubCard";
 import { BottomNav } from "@/components/BottomNav";
+import { Sidebar } from "@/components/Sidebar";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -66,10 +67,12 @@ const Community = () => {
   const clubs = activeTab === "All Clubs" ? allClubs : myClubs;
 
   return (
-    <div className="min-h-screen bg-background pb-20">
-      {/* Header */}
-      <header className="bg-card border-b border-border p-4 sticky top-0 z-10">
-        <div className="max-w-lg mx-auto space-y-3">
+    <div className="flex min-h-screen bg-background">
+      <Sidebar />
+      <div className="flex-1 pb-20 lg:pb-0">
+        {/* Header */}
+        <header className="bg-card border-b border-border p-4 lg:p-6 sticky top-0 z-10">
+          <div className="max-w-5xl mx-auto space-y-3">
           <h1 className="text-xl font-bold">Community</h1>
 
           {/* Tabs */}
@@ -88,21 +91,24 @@ const Community = () => {
               </Button>
             ))}
           </div>
-        </div>
-      </header>
-
-      {/* Clubs List */}
-      <div className="max-w-lg mx-auto px-4 py-6 space-y-3">
-        {clubs.length > 0 ? (
-          clubs.map((club, index) => <ClubCard key={index} {...club} />)
-        ) : (
-          <div className="text-center py-12 text-muted-foreground">
-            <p>You haven't joined any clubs yet</p>
           </div>
-        )}
-      </div>
+        </header>
 
-      <BottomNav />
+        {/* Clubs List */}
+        <div className="max-w-5xl mx-auto px-4 lg:px-6 py-6">
+          {clubs.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {clubs.map((club, index) => <ClubCard key={index} {...club} />)}
+            </div>
+          ) : (
+            <div className="text-center py-12 text-muted-foreground">
+              <p>You haven't joined any clubs yet</p>
+            </div>
+          )}
+        </div>
+
+        <BottomNav />
+      </div>
     </div>
   );
 };

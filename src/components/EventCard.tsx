@@ -29,7 +29,7 @@ export const EventCard = ({
   return (
     <Card
       className={cn(
-        "shadow-card hover:shadow-card-hover transition-shadow",
+        "shadow-card hover:shadow-card-hover transition-all duration-200 cursor-pointer hover:scale-[1.02]",
         horizontal ? "min-w-[280px]" : "w-full"
       )}
     >

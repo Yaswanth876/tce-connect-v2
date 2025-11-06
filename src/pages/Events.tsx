@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { EventCard } from "@/components/EventCard";
 import { BottomNav } from "@/components/BottomNav";
+import { Sidebar } from "@/components/Sidebar";
 import { cn } from "@/lib/utils";
 
 const filters = ["All", "Technical", "Cultural", "Sports"];
@@ -68,10 +69,12 @@ const Events = () => {
   });
 
   return (
-    <div className="min-h-screen bg-background pb-20">
-      {/* Header */}
-      <header className="bg-card border-b border-border p-4 sticky top-0 z-10">
-        <div className="max-w-lg mx-auto space-y-3">
+    <div className="flex min-h-screen bg-background">
+      <Sidebar />
+      <div className="flex-1 pb-20 lg:pb-0">
+        {/* Header */}
+        <header className="bg-card border-b border-border p-4 lg:p-6 sticky top-0 z-10">
+          <div className="max-w-5xl mx-auto space-y-3">
           <h1 className="text-xl font-bold">Events</h1>
 
           {/* Search Bar */}
@@ -103,23 +106,26 @@ const Events = () => {
               </Button>
             ))}
           </div>
-        </div>
-      </header>
-
-      {/* Events List */}
-      <div className="max-w-lg mx-auto px-4 py-6 space-y-3">
-        {filteredEvents.length > 0 ? (
-          filteredEvents.map((event, index) => (
-            <EventCard key={index} {...event} />
-          ))
-        ) : (
-          <div className="text-center py-12 text-muted-foreground">
-            <p>No events found</p>
           </div>
-        )}
-      </div>
+        </header>
 
-      <BottomNav />
+        {/* Events List */}
+        <div className="max-w-5xl mx-auto px-4 lg:px-6 py-6">
+          {filteredEvents.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {filteredEvents.map((event, index) => (
+                <EventCard key={index} {...event} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 text-muted-foreground">
+              <p>No events found</p>
+            </div>
+          )}
+        </div>
+
+        <BottomNav />
+      </div>
     </div>
   );
 };
