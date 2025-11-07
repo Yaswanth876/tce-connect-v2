@@ -4,6 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Calendar, Users, Trophy, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const todaysEvents = [
   {
@@ -54,6 +55,7 @@ const upcomingEvents = [
 ];
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col min-h-screen bg-background page-transition">
       <Navbar />
@@ -90,7 +92,7 @@ const Home = () => {
                 <Button 
                   size="lg" 
                   className="bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-110 transition-all duration-300 btn-shine text-base px-8 group shadow-lg"
-                  onClick={() => window.location.href = '/events'}
+                  onClick={() => navigate('/events')}
                 >
                   Explore Events
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -99,7 +101,7 @@ const Home = () => {
                   size="lg" 
                   variant="outline" 
                   className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground hover:scale-110 transition-all duration-300 text-base px-8 shadow-lg"
-                  onClick={() => window.location.href = '/community'}
+                  onClick={() => navigate('/community')}
                 >
                   Browse Clubs
                 </Button>
