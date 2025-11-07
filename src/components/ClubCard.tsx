@@ -1,4 +1,4 @@
-import { Users } from "lucide-react";
+import { Users, Bot, Code2, Glasses, Smartphone, Music, User, Palette, Book, BookOpen, Film, Plane, Radio } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
@@ -9,28 +9,49 @@ interface ClubCardProps {
   icon: string;
 }
 
+const iconMap: Record<string, any> = {
+  Bot,
+  Code2,
+  Glasses,
+  Smartphone,
+  Music,
+  User,
+  Palette,
+  Book,
+  BookOpen,
+  Film,
+  Plane,
+  Radio,
+};
+
 export const ClubCard = ({ name, description, members, icon }: ClubCardProps) => {
+  const IconComponent = iconMap[icon] || Users;
+  
   return (
-    <Card className="shadow-card hover:shadow-card-hover transition-all duration-200 cursor-pointer hover:scale-[1.02]">
-      <div className="p-4 space-y-3">
-        <div className="flex items-start gap-3">
-          <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-2xl flex-shrink-0">
-            {icon}
+    <Card className="shadow-card hover:shadow-card-hover transition-all duration-200 cursor-pointer hover:scale-[1.02] group animate-scale-in">
+      <div className="p-6 space-y-4">
+        <div className="flex items-start gap-4">
+          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+            <IconComponent className="h-8 w-8 text-primary" />
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-base leading-tight">{name}</h3>
-            <p className="text-sm text-muted-foreground line-clamp-2 mt-1">
+            <h3 className="font-semibold text-lg leading-tight group-hover:text-primary transition-colors">{name}</h3>
+            <p className="text-sm text-muted-foreground line-clamp-3 mt-2">
               {description}
             </p>
           </div>
         </div>
 
-        <div className="flex items-center justify-between pt-2">
-          <div className="flex items-center gap-1 text-sm text-muted-foreground">
-            <Users className="h-4 w-4" />
-            <span>{members} members</span>
+        <div className="flex items-center justify-between pt-3 border-t border-border">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Users className="h-4 w-4 text-primary" />
+            <span className="font-medium">{members} members</span>
           </div>
-          <Button size="sm" variant="outline" className="h-8">
+          <Button 
+            size="sm" 
+            variant="outline" 
+            className="h-9 px-4 hover:bg-primary hover:text-primary-foreground transition-all duration-300 group-hover:scale-110 btn-shine relative z-10"
+          >
             Join Discussion
           </Button>
         </div>
