@@ -1,12 +1,12 @@
-import { Users, Bot, Code2, Glasses, Smartphone, Music, User, Palette, Book, BookOpen, Film, Plane, Radio } from "lucide-react";
+import { Bot, Code2, Glasses, Smartphone, Music, User, Palette, Book, BookOpen, Film, Plane, Radio } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 interface ClubCardProps {
   name: string;
   description: string;
-  members: number;
   icon: string;
+  portalUrl: string;
 }
 
 const iconMap: Record<string, any> = {
@@ -24,9 +24,9 @@ const iconMap: Record<string, any> = {
   Radio,
 };
 
-export const ClubCard = ({ name, description, members, icon }: ClubCardProps) => {
-  const IconComponent = iconMap[icon] || Users;
-  
+export const ClubCard = ({ name, description, icon, portalUrl }: ClubCardProps) => {
+  const IconComponent = iconMap[icon] || User;
+
   return (
     <Card className="shadow-card hover:shadow-card-hover transition-all duration-200 cursor-pointer hover:scale-[1.02] group animate-scale-in">
       <div className="p-6 space-y-4">
@@ -42,17 +42,14 @@ export const ClubCard = ({ name, description, members, icon }: ClubCardProps) =>
           </div>
         </div>
 
-        <div className="flex items-center justify-between pt-3 border-t border-border">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Users className="h-4 w-4 text-primary" />
-            <span className="font-medium">{members} members</span>
-          </div>
+        <div className="flex items-center justify-end pt-3 border-t border-border">
           <Button 
             size="sm" 
             variant="outline" 
             className="h-9 px-4 hover:bg-primary hover:text-primary-foreground transition-all duration-300 group-hover:scale-110 btn-shine relative z-10"
+            onClick={() => window.open(portalUrl, '_blank')}
           >
-            Join Discussion
+            Visit Portal
           </Button>
         </div>
       </div>
