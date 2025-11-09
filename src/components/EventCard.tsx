@@ -2,8 +2,10 @@ import { Calendar, MapPin, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { useNavigate } from "react-router-dom";
 
 interface EventCardProps {
+  id?: string;
   title: string;
   date: string;
   venue: string;
@@ -13,6 +15,7 @@ interface EventCardProps {
 }
 
 export const EventCard = ({
+  id = "1",
   title,
   date,
   venue,
@@ -20,6 +23,17 @@ export const EventCard = ({
   type,
   horizontal = false,
 }: EventCardProps) => {
+  const navigate = useNavigate();
+
+  const handleViewDetails = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    navigate(`/events/${id}`);
+  };
+
+  const handleCardClick = () => {
+    navigate(`/events/${id}`);
+  };
+
   const typeColors = {
     technical: "bg-primary/10 text-primary border-primary/30",
     cultural: "bg-purple-500/10 text-purple-700 border-purple-200",
@@ -34,7 +48,10 @@ export const EventCard = ({
 
   if (horizontal) {
     return (
-      <Card className="min-w-[280px] p-4 hover:shadow-card-hover transition-all duration-300 cursor-pointer group border-l-4 border-l-primary animate-fade-in">
+      <Card 
+        className="min-w-[280px] p-4 hover:shadow-card-hover transition-all duration-300 cursor-pointer group border-l-4 border-l-primary animate-fade-in"
+        onClick={handleCardClick}
+      >
         <div className="space-y-3">
           <div className={cn(
             "inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium",
@@ -62,8 +79,9 @@ export const EventCard = ({
               size="sm" 
               variant="outline"
               className="h-7 text-xs hover:bg-primary hover:text-primary-foreground transition-all duration-300 group-hover:scale-110 btn-shine relative z-10"
+              onClick={handleViewDetails}
             >
-              Register
+              View Details
             </Button>
           </div>
         </div>
@@ -76,6 +94,7 @@ export const EventCard = ({
       className={cn(
         "overflow-hidden hover:shadow-card-hover transition-all duration-300 cursor-pointer hover:scale-[1.02] group animate-scale-in h-full flex flex-col"
       )}
+      onClick={handleCardClick}
     >
       <div className={cn("h-2 bg-gradient-to-r", typeGradients[type])}></div>
       <div className="p-5 space-y-4 flex-1 flex flex-col">
@@ -110,8 +129,9 @@ export const EventCard = ({
             size="sm" 
             variant="outline"
             className="h-8 hover:bg-primary hover:text-primary-foreground transition-all duration-300 group-hover:scale-110 btn-shine relative z-10 shrink-0"
+            onClick={handleViewDetails}
           >
-            Register
+            View Details
           </Button>
         </div>
       </div>

@@ -1,7 +1,16 @@
-import { Home, Calendar, MessageCircle, Menu, X } from "lucide-react";
+import { Home, Calendar, MessageCircle, Menu, X, User, LogOut, Settings, LayoutDashboard } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const navItems = [
   { icon: Home, label: "Home", path: "/" },
@@ -11,6 +20,37 @@ const navItems = [
 
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
+  const [userRole, setUserRole] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const authStatus = localStorage.getItem("tce_isAuthenticated");
+    const email = localStorage.getItem("tce_user_email");
+    const role = localStorage.getItem("tce_user_role");
+    setIsAuthenticated(authStatus === "true");
+    setUserEmail(email || "");
+    setUserRole(role || "");
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("tce_isAuthenticated");
+    localStorage.removeItem("tce_user_email");
+    localStorage.removeItem("tce_user_role");
+    setIsAuthenticated(false);
+    setMobileMenuOpen(false);
+    navigate("/login");
+  };
+
+  const handleDashboard = () => {
+    setMobileMenuOpen(false);
+    if (userRole === "student") {
+      navigate("/student-dashboard");
+    } else if (userRole === "organizer") {
+      navigate("/organizer-dashboard");
+    }
+  };
 
   return (
     <nav className="bg-white text-foreground shadow-lg sticky top-0 z-50 backdrop-blur-sm border-b border-border">
@@ -48,12 +88,53 @@ export const Navbar = () => {
                 <span>{item.label}</span>
               </NavLink>
             ))}
-            <a
-              href="/login"
-              className="ml-2 px-5 py-1.5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 font-semibold border border-primary text-sm btn-shine"
-            >
-              Login
-            </a>
+            
+            {isAuthenticated ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="ml-2 px-4 py-1.5 rounded-lg border-primary/30 hover:bg-primary/10 hover:border-primary transition-all duration-300 font-semibold text-sm"
+                  >
+                    <User className="h-4 w-4 mr-2" />
+                    Profile
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuLabel>
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-medium">{userEmail}</p>
+                      <p className="text-xs text-muted-foreground capitalize">{userRole}</p>
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleDashboard}>
+                    <LayoutDashboard className="h-4 w-4 mr-2" />
+                    Dashboard
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => navigate("/profile")}>
+                    <User className="h-4 w-4 mr-2" />
+                    My Profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => navigate("/settings")}>
+                    <Settings className="h-4 w-4 mr-2" />
+                    Settings
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleLogout} className="text-red-600 focus:text-red-600">
+                    <LogOut className="h-4 w-4 mr-2" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <a
+                href="/login"
+                className="ml-2 px-5 py-1.5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 font-semibold border border-primary text-sm btn-shine"
+              >
+                Login
+              </a>
+            )}
           </div>
 
           {/* Mobile Menu Button - Improved */}
@@ -71,7 +152,6 @@ export const Navbar = () => {
           </Button>
         </div>
 
-        {/* Mobile Menu */}
         {/* Mobile Menu - Improved */}
         {mobileMenuOpen && (
           <div className="md:hidden py-4 space-y-2 animate-slide-up border-t border-border bg-white">
@@ -86,14 +166,58 @@ export const Navbar = () => {
               >
                 <span>{item.label}</span>
               </NavLink>
-            ))}
-            <a
-              href="/login"
-              className="flex items-center justify-center px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 mx-2 font-semibold text-sm btn-shine"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Login
-            </a>
+              ))}
+            
+            {isAuthenticated ? (
+              <>
+                <div className="px-4 py-2 mx-2 text-sm border-t border-border mt-2">
+                  <p className="font-medium text-foreground">{userEmail}</p>
+                  <p className="text-xs text-muted-foreground capitalize">{userRole}</p>
+                </div>
+                <button
+                  onClick={handleDashboard}
+                  className="flex items-center justify-center w-full px-4 py-2 rounded-lg text-foreground/80 hover:bg-primary/10 hover:text-primary transition-all duration-300 mx-2 font-medium text-sm"
+                >
+                  <LayoutDashboard className="h-4 w-4 mr-2" />
+                  Dashboard
+                </button>
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    navigate("/profile");
+                  }}
+                  className="flex items-center justify-center w-full px-4 py-2 rounded-lg text-foreground/80 hover:bg-primary/10 hover:text-primary transition-all duration-300 mx-2 font-medium text-sm"
+                >
+                  <User className="h-4 w-4 mr-2" />
+                  My Profile
+                </button>
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    navigate("/settings");
+                  }}
+                  className="flex items-center justify-center w-full px-4 py-2 rounded-lg text-foreground/80 hover:bg-primary/10 hover:text-primary transition-all duration-300 mx-2 font-medium text-sm"
+                >
+                  <Settings className="h-4 w-4 mr-2" />
+                  Settings
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center justify-center w-full px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-all duration-300 mx-2 font-semibold text-sm mt-2"
+                >
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Logout
+                </button>
+              </>
+            ) : (
+              <a
+                href="/login"
+                className="flex items-center justify-center px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 mx-2 font-semibold text-sm btn-shine"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Login
+              </a>
+            )}
           </div>
         )}
       </div>

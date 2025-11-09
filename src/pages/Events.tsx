@@ -13,6 +13,7 @@ const filters = ["All", "Technical", "Cultural", "Sports"];
 const allEvents = [
   // Featured Upcoming Events
   {
+    id: "1",
     title: "AI Sprint - AI Consortium",
     date: "Jun 2-13, 2025",
     venue: "CSE Department",
@@ -20,6 +21,7 @@ const allEvents = [
     type: "technical" as const,
   },
   {
+    id: "2",
     title: "Field Visit - AR/VR Club",
     date: "Jun 13-14, 2025",
     venue: "Industry Location",
@@ -27,6 +29,7 @@ const allEvents = [
     type: "technical" as const,
   },
   {
+    id: "3",
     title: "Connexions - IoT Workshop",
     date: "May 9, 2025",
     venue: "IoT Lab",
@@ -34,6 +37,7 @@ const allEvents = [
     type: "technical" as const,
   },
   {
+    id: "4",
     title: "Inauguration of AI Consortium - Gen AI in Action",
     date: "Apr 2, 2025",
     venue: "Main Auditorium",
@@ -42,6 +46,7 @@ const allEvents = [
   },
   // More Technical Events
   {
+    id: "5",
     title: "CodeFest - Programming Competition",
     date: "Nov 7, 2025",
     venue: "CSE Lab",
@@ -49,6 +54,7 @@ const allEvents = [
     type: "technical" as const,
   },
   {
+    id: "6",
     title: "HackFest - 24 Hour Hackathon",
     date: "Nov 7, 2025",
     venue: "Innovation Center",
@@ -56,6 +62,7 @@ const allEvents = [
     type: "technical" as const,
   },
   {
+    id: "7",
     title: "App Mentor - Mobile Dev Workshop",
     date: "Nov 7, 2025",
     venue: "IT Department",
@@ -63,6 +70,7 @@ const allEvents = [
     type: "technical" as const,
   },
   {
+    id: "8",
     title: "Sensor Hunts - IoT Challenge",
     date: "Nov 7, 2025",
     venue: "ECE Lab",
@@ -70,6 +78,7 @@ const allEvents = [
     type: "technical" as const,
   },
   {
+    id: "9",
     title: "AI Week - Machine Learning Workshop",
     date: "Nov 7, 2025",
     venue: "AI Lab",
@@ -77,6 +86,7 @@ const allEvents = [
     type: "technical" as const,
   },
   {
+    id: "10",
     title: "Crime Scene - Cyber Security Event",
     date: "Nov 7, 2025",
     venue: "CSE Department",
@@ -84,6 +94,7 @@ const allEvents = [
     type: "technical" as const,
   },
   {
+    id: "11",
     title: "CRAFT THE CORE - Logo Design Contest",
     date: "Nov 7, 2025",
     venue: "Design Studio",
@@ -92,6 +103,7 @@ const allEvents = [
   },
   // Cultural Events
   {
+    id: "12",
     title: "TCE Cultural Fest 2025",
     date: "Apr 10, 2025",
     venue: "Main Ground",
@@ -99,6 +111,7 @@ const allEvents = [
     type: "cultural" as const,
   },
   {
+    id: "13",
     title: "Dance Competition - AFD",
     date: "Feb 28, 2025",
     venue: "Student Activity Center",
@@ -106,6 +119,7 @@ const allEvents = [
     type: "cultural" as const,
   },
   {
+    id: "14",
     title: "Music Fest - Andhadhi",
     date: "Mar 5, 2025",
     venue: "Auditorium",
@@ -113,6 +127,7 @@ const allEvents = [
     type: "cultural" as const,
   },
   {
+    id: "15",
     title: "Book Reading Session",
     date: "Mar 15, 2025",
     venue: "TCE Library",
@@ -120,6 +135,7 @@ const allEvents = [
     type: "cultural" as const,
   },
   {
+    id: "16",
     title: "Film Screening - Cinemates",
     date: "Mar 20, 2025",
     venue: "Mini Auditorium",
@@ -127,6 +143,7 @@ const allEvents = [
     type: "cultural" as const,
   },
   {
+    id: "17",
     title: "Fashion Show - Always on Trend",
     date: "Apr 5, 2025",
     venue: "Main Stage",
@@ -134,6 +151,7 @@ const allEvents = [
     type: "cultural" as const,
   },
   {
+    id: "18",
     title: "Literary Fest - Anglophile Lounge",
     date: "Apr 15, 2025",
     venue: "English Department",
@@ -142,6 +160,7 @@ const allEvents = [
   },
   // Sports Events
   {
+    id: "19",
     title: "Inter-College Sports Meet",
     date: "Mar 20, 2025",
     venue: "TCE Sports Complex",
@@ -149,6 +168,7 @@ const allEvents = [
     type: "sports" as const,
   },
   {
+    id: "20",
     title: "Cricket Tournament",
     date: "Feb 15, 2025",
     venue: "Cricket Ground",
@@ -156,6 +176,7 @@ const allEvents = [
     type: "sports" as const,
   },
   {
+    id: "21",
     title: "Basketball Championship",
     date: "Mar 1, 2025",
     venue: "Basketball Court",
@@ -163,6 +184,7 @@ const allEvents = [
     type: "sports" as const,
   },
   {
+    id: "22",
     title: "Athletic Meet 2025",
     date: "Apr 25, 2025",
     venue: "Athletic Track",

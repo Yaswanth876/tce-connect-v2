@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const todaysEvents = [
   {
+    id: "1",
     title: "AI Sprint Workshop",
     date: "Today, 10:00 AM",
     venue: "CSE Department Lab",
@@ -15,6 +16,7 @@ const todaysEvents = [
     type: "technical" as const,
   },
   {
+    id: "14",
     title: "Music Jam Session",
     date: "Today, 3:00 PM",
     venue: "Student Activity Center",
@@ -22,6 +24,7 @@ const todaysEvents = [
     type: "cultural" as const,
   },
   {
+    id: "19",
     title: "Inter-Department Football Match",
     date: "Today, 4:30 PM",
     venue: "TCE Sports Ground",
@@ -32,6 +35,7 @@ const todaysEvents = [
 
 const upcomingEvents = [
   {
+    id: "2",
     title: "Field Visit - AR/VR",
     date: "Jun 13-14, 2025",
     venue: "Industry Partner Location",
@@ -39,6 +43,7 @@ const upcomingEvents = [
     type: "technical" as const,
   },
   {
+    id: "3",
     title: "Connexions - IoT Workshop",
     date: "May 9, 2025",
     venue: "IoT Lab Complex",
@@ -46,11 +51,12 @@ const upcomingEvents = [
     type: "technical" as const,
   },
   {
+    id: "12",
     title: "Cultural Night 2025",
     date: "Apr 10, 2025",
     venue: "TCE Main Auditorium",
     department: "Cultural Society",
-    type: "technical" as const,
+    type: "cultural" as const,
   },
 ];
 

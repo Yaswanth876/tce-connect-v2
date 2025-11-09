@@ -1,7 +1,8 @@
 {
-  "name": "vite_react_shadcn_ts",
+  "name": "tce-connect",
+  "version": "1.0.0",
+  "description": "TCE-Connect: A centralized web platform for Thiagarajar College of Engineering to streamline event communication and student engagement",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
