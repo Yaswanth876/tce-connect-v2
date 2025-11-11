@@ -1,7 +1,7 @@
 import { Home, Calendar, MessageCircle, Menu, X, User, LogOut, Settings, LayoutDashboard } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -24,20 +24,47 @@ export const Navbar = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userRole, setUserRole] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
 
-  useEffect(() => {
+  const checkAuth = () => {
     const authStatus = localStorage.getItem("tce_isAuthenticated");
     const email = localStorage.getItem("tce_user_email");
     const role = localStorage.getItem("tce_user_role");
     setIsAuthenticated(authStatus === "true");
     setUserEmail(email || "");
     setUserRole(role || "");
+  };
+
+  useEffect(() => {
+    // Check auth on mount and whenever location changes
+    checkAuth();
+  }, [location]);
+
+  useEffect(() => {
+    // Listen for storage changes (including custom events)
+    const handleStorageChange = () => {
+      checkAuth();
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    
+    // Also check on navigation/focus
+    window.addEventListener("focus", checkAuth);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("focus", checkAuth);
+    };
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("tce_isAuthenticated");
     localStorage.removeItem("tce_user_email");
     localStorage.removeItem("tce_user_role");
+    
+    // Dispatch storage event to notify other components
+    window.dispatchEvent(new Event("storage"));
+    
     setIsAuthenticated(false);
     setMobileMenuOpen(false);
     navigate("/login");

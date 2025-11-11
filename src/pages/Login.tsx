@@ -23,8 +23,15 @@ export default function Login() {
       localStorage.setItem("tce_isAuthenticated", "true");
       localStorage.setItem("tce_user_email", email);
       localStorage.setItem("tce_user_role", role);
+      
+      // Dispatch a custom event to notify other components
+      window.dispatchEvent(new Event("storage"));
+      
       setIsLoading(false);
-      navigate(role === "student" ? "/student-dashboard" : "/organizer-dashboard");
+      
+      // Use window.location for more reliable navigation in deployed environments
+      const targetPath = role === "student" ? "/student-dashboard" : "/organizer-dashboard";
+      window.location.href = targetPath;
     }, 1500);
   };
 
